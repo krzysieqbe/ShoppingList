@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" type="image/png" href="img/favicon.png">
 
@@ -21,10 +21,10 @@
         </div>
         <div class="product-input-wrapper">
             <div class="input-title">Dodaj nowy produkt</div>
-            <input name="name" id="form-name" placeholder="Wpisz nawę produktu" onkeypress="handleKeyPress(event)">
-            <div id="new-item-btn" class="btn">Dodaj</div>
+            <input name="name" id="item-name" placeholder="Wpisz nawę produktu" onkeypress="handleKeyPress(event)">
+            <div id="new-item-btn" class="btn" onclick="addItem()">Dodaj</div>
         </div>
-        <div class="products-list-wrapper">
+        <div class="products-list-wrapper" id="products-list">
 
         </div>
     </div>
