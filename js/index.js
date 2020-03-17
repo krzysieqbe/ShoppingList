@@ -37,11 +37,20 @@ var renderList = function() {
         html += '<div>v</div>';
         html += '<div>' + item.name + '</div>';
         html += '<div>...</div>';
-        html += '<div><i class="fa fa-trash"></i></div>';
+        html += '<div class="btn" id="item-del-' + i + '"><i class="fa fa-trash"></i></div>';
         html += '</div>';
 
 
         list.innerHTML += html;
+
+        var delBtn = document.getElementById("item-del-" + i);
+
+        delBtn.onclick = function() {
+            var id = this.id;
+            console.log(id);
+            console.log(id.substring(9, id.length));
+        }
+
     })
 };
 
