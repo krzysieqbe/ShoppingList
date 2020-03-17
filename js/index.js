@@ -5,19 +5,44 @@ var handleKeyPress = function(e) {
     }
 };
 
+var items = [];
 
 function addItem() {
     e = document.getElementById("item-name");
-    var item = e.value;
+    var itemName = e.value.trimLeft();
     e.value = "";
-    var html = '<div class="products-list-item">';
-    html += '<div>v</div>';
-    html += '<div>' + item + '</div>';
-    html += '<div>...</div>';
-    html += '<div><i class="fa fa-trash"></i></div>';
 
-    list = document.getElementById("products-list");
-    list.innerHTML += html;
+    if (itemName != "") {
+
+        var item = {
+            name: itemName,
+            checked: 0,
+            comments: ""
+        }
+
+        items.push(item);
+
+        renderList();
+    }
+};
+
+var renderList = function() {
+    var list = document.getElementById("products-list");
+    list.innerHTML = "";
+
+    items.forEach(function(item, i) {
+
+        var html = '<div class="products-list-item" id="item-' + i + '">';
+
+        html += '<div>v</div>';
+        html += '<div>' + item.name + '</div>';
+        html += '<div>...</div>';
+        html += '<div><i class="fa fa-trash"></i></div>';
+        html += '</div>';
+
+
+        list.innerHTML += html;
+    })
 };
 
 document.onload = function() {
@@ -25,4 +50,5 @@ document.onload = function() {
         e = document.getElementById("item-name");
         e.value = "";
     }, 250);
+
 }();
