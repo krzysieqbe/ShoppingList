@@ -35,16 +35,16 @@ var renderList = function() {
         var html = '<div class="products-list-item" id="item-' + i + '">';
 
         if (item.checked == 0) {
-            html += '<div class="btn btn-check" id="item-check-' + i + '"><i class="fa fa-square"></i></div>';
-            html += '<div>' + item.name + '</div>';
-            html += '<div>...</div>';
-            html += '<div class="btn btn-del" id="item-del-' + i + '"><i class="fa fa-trash"></i></div>';
+            html += '<div class="btn-item btn-check" id="item-check-' + i + '"><i class="fa fa-square"></i></div>';
+            html += '<div class="text-item">' + item.name + '</div>';
+            html += '<div class="text-item">...</div>';
+            html += '<div class="btn-item btn-del" id="item-del-' + i + '"><i class="fa fa-trash"></i></div>';
             html += '</div>';
         } else {
-            html += '<div class="btn btn-check" id="item-check-' + i + '"><i class="fa fa-check-square"></i></div>';
-            html += '<div><strike>  ' + item.name + '  </strike></div>';
-            html += '<div>...</div>';
-            html += '<div class="btn btn-del" id="item-del-' + i + '"><i class="fa fa-trash"></i></div>';
+            html += '<div class="btn-item btn-check" id="item-check-' + i + '"><i class="fa fa-check-square"></i></div>';
+            html += '<div class="text-item"><strike>  ' + item.name + '  </strike></div>';
+            html += '<div class="text-item">...</div>';
+            html += '<div class="btn-item btn-del" id="item-del-' + i + '"><i class="fa fa-trash"></i></div>';
             html += '</div>';
         }
 

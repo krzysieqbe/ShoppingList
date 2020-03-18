@@ -34,7 +34,26 @@ input {
     box-sizing: border-box;
 }
 
+.main-title {
+    color: orange;
+}
+
 .products-list-item {
     display: grid;
     grid-template-columns: 1fr 5fr 3fr 1fr;
+}
+
+.btn-item {
+    font-size: 3rem;
+    color: orange;
+    margin: auto;
+    width: 50%;
+}
+
+.btn-item:hover {
+    color: #fcba5d;
+}
+
+.text-item {
+    padding-top: 1.3rem;
 }
