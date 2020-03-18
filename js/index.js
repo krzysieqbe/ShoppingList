@@ -34,24 +34,39 @@ var renderList = function() {
 
         var html = '<div class="products-list-item" id="item-' + i + '">';
 
-        html += '<div>v</div>';
-        html += '<div>' + item.name + '</div>';
-        html += '<div>...</div>';
-        html += '<div class="btn" id="item-del-' + i + '"><i class="fa fa-trash"></i></div>';
-        html += '</div>';
+        if (item.checked == 0) {
+            html += '<div class="btn btn-check" id="item-check-' + i + '"><i class="fa fa-square"></i></div>';
+            html += '<div>' + item.name + '</div>';
+            html += '<div>...</div>';
+            html += '<div class="btn btn-del" id="item-del-' + i + '"><i class="fa fa-trash"></i></div>';
+            html += '</div>';
+        } else {
+            html += '<div class="btn btn-check" id="item-check-' + i + '"><i class="fa fa-check-square"></i></div>';
+            html += '<div><strike>  ' + item.name + '  </strike></div>';
+            html += '<div>...</div>';
+            html += '<div class="btn btn-del" id="item-del-' + i + '"><i class="fa fa-trash"></i></div>';
+            html += '</div>';
+        }
 
 
         list.innerHTML += html;
-
-        var delBtn = document.getElementById("item-del-" + i);
-
-        delBtn.onclick = function() {
-            var id = this.id;
-            console.log(id);
-            console.log(id.substring(9, id.length));
-        }
-
     })
+
+    $(".btn-del").click(function() {
+        var id = this.id;
+        var index = id.substring(9, id.length);
+
+        items.splice(index, 1);
+        renderList();
+    });
+
+    $(".btn-check").click(function() {
+        var id = this.id;
+        var index = id.substring(11, id.length);
+        items[index].checked = !items[index].checked;
+        renderList();
+    });
+
 };
 
 document.onload = function() {
