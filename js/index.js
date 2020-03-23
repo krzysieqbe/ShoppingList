@@ -21,7 +21,7 @@ function addItem() {
         }
 
         items.push(item);
-
+        localStorage.setItem("kb-sl-data", JSON.stringify(items));
         renderList();
     }
 };
@@ -50,13 +50,14 @@ var renderList = function() {
 
 
         list.innerHTML += html;
-    })
+    });
 
     $(".btn-del").click(function() {
         var id = this.id;
         var index = id.substring(9, id.length);
 
         items.splice(index, 1);
+        localStorage.setItem("kb-sl-data", JSON.stringify(items));
         renderList();
     });
 
@@ -64,6 +65,7 @@ var renderList = function() {
         var id = this.id;
         var index = id.substring(11, id.length);
         items[index].checked = !items[index].checked;
+        localStorage.setItem("kb-sl-data", JSON.stringify(items));
         renderList();
     });
 
@@ -73,6 +75,12 @@ document.onload = function() {
     setTimeout(function() {
         e = document.getElementById("item-name");
         e.value = "";
+
+        items = JSON.parse(localStorage.getItem("kb-sl-data")) || items;
+        renderList();
+
+
+
     }, 250);
 
 }();
