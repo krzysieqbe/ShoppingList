@@ -20,11 +20,16 @@ body {
     box-sizing: border-box;
 }
 
+.main-wrapper {
+    display: flexbox;
+    flex-direction: column;
+}
+
 label {
     font-weight: bold;
 }
 
-input {
+.item-input {
     width: 100%;
     padding: 1.2rem .6rem;
     margin: .4rem 0;
@@ -60,4 +65,19 @@ input {
 
 .btn-del {
     text-align: right;
+}
+
+.bottom-btn-wrapper {
+    display: inline-block;
+}
+
+.bottom-btn {
+    display: inline-block;
+    background-color: orange;
+    color: white;
+    cursor: pointer;
+}
+
+.bottom-btn:hover {
+    background-color: #fcba5d;
 }

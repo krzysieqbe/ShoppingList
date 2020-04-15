@@ -7,11 +7,13 @@
 
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/lib/jquery-ui.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" type="image/png" href="img/favicon.png">
 
     <title>Lista Zakupów</title>
     <script type="text/javascript" src="js/lib/jquery.3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
 </head>
 
@@ -21,11 +23,13 @@
             <h1 class="main-title">Lista zakupów</h1>
         </div>
         <div class="product-input-wrapper">
-            <input name="name" id="item-name" placeholder="Wpisz nawę produktu" onkeypress="handleKeyPress(event)">
-            <!--div id="new-item-btn" class="btn" onclick="addItem()">Dodaj</div !-->
+            <input class="item-input" name="name" id="item-name" placeholder="Wpisz nawę produktu" onkeypress="handleKeyPress(event)">
         </div>
         <div class="products-list-wrapper" id="products-list">
-
+        </div>
+        <div class="bottom-btn-wrapper">
+            <div class="bottom-btn" id="btn-del-checked">Usuń zaznaczone</div>
+            <div class="bottom-btn" id="btn-del-all">Usuń wszystkie</div>
         </div>
     </div>
 
