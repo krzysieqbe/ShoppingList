@@ -1,7 +1,7 @@
 var handleKeyPress = function(e) {
     var key = e.keyCode || e.which;
     if (key == 13) {
-        addItem();
+        addItem(null);
     }
 };
 
@@ -10,10 +10,13 @@ var data = {
     shoppingList: []
 };
 
-function addItem() {
+var acItem;
+
+var addItem = function() {
     var e = document.getElementById("item-name");
-    var itemName = e.value.trimLeft();
+    var itemName = acItem || e.value.trimLeft();
     e.value = "";
+    acItem = "";
 
     if (itemName != "") {
 
@@ -126,8 +129,13 @@ document.onload = function() {
             $("#item-name").autocomplete({
                 source: itemNames,
                 select: function(event, ui) {
-                    console.log(ui.item.label);
-                    setTimeout(addItem(), 500);
+                    //console.log(ui.item.label);
+                    setTimeout(function() {
+                        var e = document.getElementById("item-name");
+                        e.value = "";
+                        acItem = ui.item.label;
+                        addItem();
+                    }, 100);
                 }
             });
         }
