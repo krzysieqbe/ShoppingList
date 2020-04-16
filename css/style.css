@@ -21,7 +21,9 @@ body {
     height: 100%;
 }
 
-.main-wrapper {}
+.main-wrapper {
+    height: 100%;
+}
 
 label {
     font-weight: bold;
@@ -30,7 +32,7 @@ label {
 .product-input-wrapper {
     margin-left: 2%;
     margin-right: 2%;
-    height: 10%;
+    height: 10vh;
 }
 
 .item-input {
@@ -46,7 +48,7 @@ label {
 .title-wrapper {
     margin-left: 2%;
     margin-top: 2%;
-    height: 10%;
+    height: 10vh;
 }
 
 .main-title {
@@ -55,9 +57,8 @@ label {
 
 .products-list-wrapper {
     overflow-y: scroll;
-    height: 35vh;
     padding-left: 1rem;
-    height: 70%;
+    height: 70vh;
 }
 
 .products-list-item {
@@ -87,8 +88,8 @@ label {
 .bottom-btn-wrapper {
     display: inline-block;
     position: fixed;
-    bottom: 10%;
-    height: 10%;
+    bottom: 0;
+    height: 5vh;
     width: 100%;
     margin-left: 1%;
     margin-right: 1%;
@@ -102,6 +103,7 @@ label {
     width: 49%;
     height: 100%;
     text-align: center;
+    border-radius: .5rem;
 }
 
 .bottom-btn:hover {
