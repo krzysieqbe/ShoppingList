@@ -103,9 +103,35 @@ label {
     width: 49%;
     height: 100%;
     text-align: center;
-    border-radius: .5rem;
 }
 
 .bottom-btn:hover {
+    background-color: #fcba5d;
+}
+
+#btn-del-checked {
+    border-top-left-radius: .5rem;
+}
+
+#btn-del-all {
+    border-bottom-right-radius: .5rem;
+}
+
+.ui-dialog-titlebar {
+    color: white;
+    background-color: orange;
+}
+
+.ui-dialog-content {
+    color: orange;
+}
+
+.ui-button {
+    color: white;
+    background-color: orange;
+}
+
+.ui-button:hover {
+    color: white;
     background-color: #fcba5d;
 }

@@ -46,6 +46,22 @@ var addItem = function() {
     }
 };
 
+var deleteAll = function() {
+    data.shoppingList = [];
+    localStorage.setItem("kb-sl-data", JSON.stringify(data));
+    renderList();
+};
+
+var deleteChecked = function() {
+    data.shoppingList.forEach(function(item, index) {
+        if (item.checked) {
+            data.shoppingList.splice(index, 1);
+            localStorage.setItem("kb-sl-data", JSON.stringify(data));
+        }
+    });
+    renderList();
+};
+
 var renderList = function() {
 
     var list = document.getElementById("products-list");
@@ -98,19 +114,47 @@ var renderList = function() {
     });
 
     $('#btn-del-checked').click(function() {
-        data.shoppingList.forEach(function(item, index) {
-            if (item.checked) {
-                data.shoppingList.splice(index, 1);
-                localStorage.setItem("kb-sl-data", JSON.stringify(data));
-            }
-        });
-        renderList();
+        $("#dialog-delete-checked").dialog("open");
+        $('.ui-dialog-titlebar-close').hide();
     });
 
     $('#btn-del-all').click(function() {
-        data.shoppingList = [];
-        localStorage.setItem("kb-sl-data", JSON.stringify(data));
-        renderList();
+        $("#dialog-delete-all").dialog("open");
+        $('.ui-dialog-titlebar-close').hide();
+    });
+
+    $("#dialog-delete-all").dialog({
+        autoOpen: false,
+        resizable: false,
+        height: "auto",
+        width: "60%",
+        modal: true,
+        buttons: {
+            "Usuń": function() {
+                deleteAll();
+                $(this).dialog("close");
+            },
+            "Anuluj": function() {
+                $(this).dialog("close");
+            }
+        }
+    });
+
+    $("#dialog-delete-checked").dialog({
+        autoOpen: false,
+        resizable: false,
+        height: "auto",
+        width: "60%",
+        modal: true,
+        buttons: {
+            "Usuń": function() {
+                deleteChecked();
+                $(this).dialog("close");
+            },
+            "Anuluj": function() {
+                $(this).dialog("close");
+            }
+        }
     });
 
 };
