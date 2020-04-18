@@ -11,6 +11,8 @@ var data = {
 };
 
 var acItem;
+var curEditItem = -1;
+
 
 var addItem = function() {
     var e = document.getElementById("item-name");
@@ -70,20 +72,18 @@ var renderList = function() {
     data.shoppingList.forEach(function(item, i) {
 
         var html = '<div class="products-list-item" id="item-' + i + '">';
-
+        var htmlName;
         if (item.checked == 0) {
-            html += '<div class="btn-item btn-check" id="item-check-' + i + '"><i class="fa fa-square"></i></div>';
-            html += '<div class="text-item">' + item.name + '</div>';
-            html += '<div class="text-item">...</div>';
-            html += '<div class="btn-item btn-edit" id="item-edit-' + i + '"><i class="fa fa-edit"></i></div>';
-            html += '</div>';
+            htmlName '<div class="text-item">' + item.name + '</div>';
         } else {
-            html += '<div class="btn-item btn-check" id="item-check-' + i + '"><i class="fa fa-check-square"></i></div>';
-            html += '<div class="text-item"><strike>  ' + item.name + '  </strike></div>';
-            html += '<div class="text-item">...</div>';
-            html += '<div class="btn-item btn-edit" id="item-edit-' + i + '"><i class="fa fa-edit"></i></div>';
-            html += '</div>';
+            htmlName = '<div class="text-item"><strike>  ' + item.name + '  </strike></div>';
         }
+
+        html += '<div class="btn-item btn-check" id="item-check-' + i + '"><i class="fa fa-check-square"></i></div>';
+        html += htmlName;
+        html += '<div class="text-item-details">...</div>';
+        html += '<div class="btn-item btn-edit" id="item-edit-' + i + '"><i class="fa fa-edit"></i></div>';
+        html += '</div>';
 
         //<i class="fas fa-ellipsis-h"></i>
         list.innerHTML += html;
@@ -101,8 +101,11 @@ var renderList = function() {
     $(".btn-edit").click(function() {
         var id = this.id;
         var index = id.substring(10, id.length);
-        console.log(index);
-        renderList();
+        curEditItem = index;
+        $("#dialog-detail-form").dialog("open");
+        $(".ui-dialog-titlebar").hide();
+        document.getElementById("product-name-title").innerHTML = data.shoppingList[index].name.toUpperCase();
+        $('.det-input').val('');
     });
 
     $(".btn-check").click(function() {
@@ -111,50 +114,6 @@ var renderList = function() {
         data.shoppingList[index].checked = !data.shoppingList[index].checked;
         localStorage.setItem("kb-sl-data", JSON.stringify(data));
         renderList();
-    });
-
-    $('#btn-del-checked').click(function() {
-        $("#dialog-delete-checked").dialog("open");
-        $('.ui-dialog-titlebar-close').hide();
-    });
-
-    $('#btn-del-all').click(function() {
-        $("#dialog-delete-all").dialog("open");
-        $('.ui-dialog-titlebar-close').hide();
-    });
-
-    $("#dialog-delete-all").dialog({
-        autoOpen: false,
-        resizable: false,
-        height: "auto",
-        width: "60%",
-        modal: true,
-        buttons: {
-            "Usuń": function() {
-                deleteAll();
-                $(this).dialog("close");
-            },
-            "Anuluj": function() {
-                $(this).dialog("close");
-            }
-        }
-    });
-
-    $("#dialog-delete-checked").dialog({
-        autoOpen: false,
-        resizable: false,
-        height: "auto",
-        width: "60%",
-        modal: true,
-        buttons: {
-            "Usuń": function() {
-                deleteChecked();
-                $(this).dialog("close");
-            },
-            "Anuluj": function() {
-                $(this).dialog("close");
-            }
-        }
     });
 
 };
@@ -184,6 +143,77 @@ document.onload = function() {
             });
         }
         renderList();
+
+        $('#btn-del-checked').click(function() {
+            $("#dialog-delete-checked").dialog("open");
+            $(".ui-dialog-titlebar").show();
+            $('.ui-dialog-titlebar-close').hide();
+        });
+
+        $('#btn-del-all').click(function() {
+            $("#dialog-delete-all").dialog("open");
+            $(".ui-dialog-titlebar").show();
+            $('.ui-dialog-titlebar-close').hide();
+        });
+
+        $("#dialog-delete-all").dialog({
+            autoOpen: false,
+            resizable: false,
+            height: "auto",
+            width: "60%",
+            modal: true,
+            buttons: {
+                "Usuń": function() {
+                    deleteAll();
+                    $(this).dialog("close");
+                },
+                "Anuluj": function() {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        $("#dialog-delete-checked").dialog({
+            autoOpen: false,
+            resizable: false,
+            height: "auto",
+            width: "60%",
+            modal: true,
+            buttons: {
+                "Usuń": function() {
+                    deleteChecked();
+                    $(this).dialog("close");
+                },
+                "Anuluj": function() {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        $("#dialog-detail-form").dialog({
+            autoOpen: false,
+            resizable: false,
+            height: "auto",
+            width: "60%",
+            modal: true,
+            buttons: {
+                "OK": function() {
+                    $(this).dialog("close");
+                    renderList();
+                },
+            }
+        });
+
+        $(".form-wrapper").focusout(function() {
+            item = data.shoppingList[curEditItem];
+            item.category = $("#input-cat").val();
+            item.qauntity = $("#input-qty").val();
+            item.comments = $("#input-comments").val();
+            data.shoppingList[curEditItem] = item;
+            localStorage.setItem("kb-sl-data", JSON.stringify(data));
+            renderList();
+        });
+
     }, 250);
 
 }();
