@@ -5,10 +5,17 @@ var handleKeyPress = function(e) {
     }
 };
 
+var settings = {
+    show: 'showAll',
+    sort: 'addTime'
+};
+
 var data = {
     items: [],
     shoppingList: []
 };
+
+data.settings = settings;
 
 var acItem;
 var curEditItem = -1;
@@ -90,7 +97,10 @@ var renderList = function() {
     list.innerHTML = "";
 
     data.shoppingList.forEach(function(item, i) {
-        renderItemRow(list, item, i);
+        if (data.settings.show == "showAll" || !item.checked) {
+            renderItemRow(list, item, i);
+        }
+
 
     });
 
@@ -132,6 +142,10 @@ document.onload = function() {
         e.value = "";
         var itemNames = [];
         dataLS = JSON.parse(localStorage.getItem("kb-sl-data"));
+        if (!dataLS.settings) {
+            dataLS.settings = settings;
+        }
+
         if (dataLS.shoppingList) {
             data = dataLS;
             data.items.forEach(function(item) {
@@ -223,6 +237,27 @@ document.onload = function() {
             localStorage.setItem("kb-sl-data", JSON.stringify(data));
             renderList();
         });
+
+        $('.settings-btn-off').click(function() {
+            var mode = this.id.substring(this.id.indexOf('-') + 1, this.id.length);
+            var prevMode = data.settings.show;
+            if (mode != prevMode) {
+                $('#set-' + mode).removeClass('settings-btn-off');
+                $('#set-' + mode).addClass('settings-btn-on');
+
+                $('#set-' + prevMode).addClass('settings-btn-off');
+                $('#set-' + prevMode).removeClass('settings-btn-on');
+
+                data.settings.show = mode;
+                localStorage.setItem("kb-sl-data", JSON.stringify(data));
+                renderList();
+            }
+
+        });
+
+        var settingsShow = data.settings.show;
+        $('#set-' + settingsShow).removeClass('settings-btn-off');
+        $('#set-' + settingsShow).addClass('settings-btn-on');
 
     }, 250);
 

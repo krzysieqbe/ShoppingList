@@ -28,7 +28,7 @@ body {
 .product-input-wrapper {
     margin-left: 2%;
     margin-right: 2%;
-    height: 12vh;
+    height: 6vh;
 }
 
 .item-input {
@@ -166,4 +166,30 @@ body {
 
 #input-comments {
     width: 100%;
+}
+
+.settings-button-wrapper {
+    width: 100%;
+    display: inline-block;
+}
+
+.settings-btn {
+    display: inline-block;
+    width: 49.8%;
+    font-size: 1.2rem;
+    text-align: center;
+    cursor: pointer;
+    border-width: 1px;
+    border-style: solid;
+    border-color: orange;
+}
+
+.settings-btn-off {
+    color: orange;
+    background-color: white;
+}
+
+.settings-btn-on {
+    color: white;
+    background-color: orange;
 }
