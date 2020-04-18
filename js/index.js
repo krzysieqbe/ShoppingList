@@ -74,7 +74,7 @@ var renderList = function() {
         var html = '<div class="products-list-item" id="item-' + i + '">';
         var htmlName;
         if (item.checked == 0) {
-            htmlName '<div class="text-item">' + item.name + '</div>';
+            htmlName = '<div class="text-item">' + item.name + '</div>';
         } else {
             htmlName = '<div class="text-item"><strike>  ' + item.name + '  </strike></div>';
         }
