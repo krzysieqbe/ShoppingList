@@ -26,7 +26,8 @@ var addItem = function() {
             name: itemName,
             checked: 0,
             category: '',
-            qauntity: ''
+            qauntity: '',
+            comments: ''
         }
 
         var itemExsist = 0;
@@ -64,29 +65,33 @@ var deleteChecked = function() {
     renderList();
 };
 
+var renderItemRow = function(list, item, i) {
+    var html = '<div class="products-list-item" id="item-' + i + '">';
+    if (item.checked == 0) {
+        html += '<div class="btn-item btn-check" id="item-check-' + i + '"><i class="fa fa-square"></i></div>' +
+            '<div class="text-item">' +
+            item.name + '<span class="text-item-details">&emsp; ' + item.category + ", " + item.qauntity + ', ' + item.comments + '</span></div>';
+    } else {
+        html += '<div class="btn-item btn-check" id="item-check-' + i + '"><i class="fa fa-check-square"></i></div>' +
+            '<div class="text-item"><strike>' +
+            item.name + '<span class="text-item-details">&emsp; ' + item.category + ", " + item.qauntity + ', ' + item.comments + '</span></strike></div>';
+    }
+
+    html += '<div class="btn-item btn-edit" id="item-edit-' + i + '"><i class="fa fa-edit"></i></div>';
+    html += '</div>';
+
+    //<i class="fas fa-ellipsis-h"></i>
+    list.innerHTML += html;
+}
+
 var renderList = function() {
 
     var list = document.getElementById("products-list");
     list.innerHTML = "";
 
     data.shoppingList.forEach(function(item, i) {
+        renderItemRow(list, item, i);
 
-        var html = '<div class="products-list-item" id="item-' + i + '">';
-        var htmlName;
-        if (item.checked == 0) {
-            htmlName = '<div class="text-item">' + item.name + '</div>';
-        } else {
-            htmlName = '<div class="text-item"><strike>  ' + item.name + '  </strike></div>';
-        }
-
-        html += '<div class="btn-item btn-check" id="item-check-' + i + '"><i class="fa fa-check-square"></i></div>';
-        html += htmlName;
-        html += '<div class="text-item-details">...</div>';
-        html += '<div class="btn-item btn-edit" id="item-edit-' + i + '"><i class="fa fa-edit"></i></div>';
-        html += '</div>';
-
-        //<i class="fas fa-ellipsis-h"></i>
-        list.innerHTML += html;
     });
 
     $(".btn-del").click(function() {
@@ -105,7 +110,9 @@ var renderList = function() {
         $("#dialog-detail-form").dialog("open");
         $(".ui-dialog-titlebar").hide();
         document.getElementById("product-name-title").innerHTML = data.shoppingList[index].name.toUpperCase();
-        $('.det-input').val('');
+        $('#input-cat').val(data.shoppingList[index].category);
+        $('#input-qty').val(data.shoppingList[index].quantity);
+        $('#input-comments').val(data.shoppingList[index].comments);
     });
 
     $(".btn-check").click(function() {
