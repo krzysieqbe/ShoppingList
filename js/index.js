@@ -109,6 +109,7 @@ var renderList = function() {
         curEditItem = index;
         $("#dialog-detail-form").dialog("open");
         $(".ui-dialog-titlebar").hide();
+        $(".ui-dialog-content").show();
         document.getElementById("product-name-title").innerHTML = data.shoppingList[index].name.toUpperCase();
         $('#input-cat').val(data.shoppingList[index].category);
         $('#input-qty').val(data.shoppingList[index].quantity);
@@ -154,6 +155,7 @@ document.onload = function() {
         $('#btn-del-checked').click(function() {
             $("#dialog-delete-checked").dialog("open");
             $(".ui-dialog-titlebar").show();
+            $(".ui-dialog-content").hide();
             $('.ui-dialog-titlebar-close').hide();
         });
 
@@ -161,6 +163,7 @@ document.onload = function() {
             $("#dialog-delete-all").dialog("open");
             $(".ui-dialog-titlebar").show();
             $('.ui-dialog-titlebar-close').hide();
+            $(".ui-dialog-content").hide();
         });
 
         $("#dialog-delete-all").dialog({
