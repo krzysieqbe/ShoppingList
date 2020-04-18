@@ -26,7 +26,7 @@ var addItem = function() {
             name: itemName,
             checked: 0,
             category: '',
-            qauntity: '',
+            quantity: '',
             comments: ''
         }
 
@@ -70,11 +70,11 @@ var renderItemRow = function(list, item, i) {
     if (item.checked == 0) {
         html += '<div class="btn-item btn-check" id="item-check-' + i + '"><i class="fa fa-square"></i></div>' +
             '<div class="text-item">' +
-            item.name + '<span class="text-item-details">&emsp; ' + item.category + ", " + item.qauntity + ', ' + item.comments + '</span></div>';
+            item.name + '<span class="text-item-details">&emsp; ' + item.category + ", " + item.quantity + ', ' + item.comments + '</span></div>';
     } else {
         html += '<div class="btn-item btn-check" id="item-check-' + i + '"><i class="fa fa-check-square"></i></div>' +
             '<div class="text-item"><strike>' +
-            item.name + '<span class="text-item-details">&emsp; ' + item.category + ", " + item.qauntity + ', ' + item.comments + '</span></strike></div>';
+            item.name + '<span class="text-item-details">&emsp; ' + item.category + ", " + item.quantity + ', ' + item.comments + '</span></strike></div>';
     }
 
     html += '<div class="btn-item btn-edit" id="item-edit-' + i + '"><i class="fa fa-edit"></i></div>';
@@ -217,7 +217,7 @@ document.onload = function() {
         $(".form-wrapper").focusout(function() {
             item = data.shoppingList[curEditItem];
             item.category = $("#input-cat").val();
-            item.qauntity = $("#input-qty").val();
+            item.quantity = $("#input-qty").val();
             item.comments = $("#input-comments").val();
             data.shoppingList[curEditItem] = item;
             localStorage.setItem("kb-sl-data", JSON.stringify(data));
