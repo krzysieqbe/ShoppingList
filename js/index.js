@@ -1,7 +1,7 @@
 var handleKeyPress = function(e) {
     var key = e.keyCode || e.which;
     if (key == 13) {
-        addItem(null);
+        addItem();
     }
 };
 
@@ -20,6 +20,25 @@ data.settings = settings;
 var acItem;
 var curEditItem = -1;
 
+var compareCat = function(a, b) {
+    if (a.category < b.category) {
+        return -1;
+    }
+    if (a.category > b.category) {
+        return 1;
+    }
+    return 0;
+}
+
+var compareId = function(a, b) {
+    if (a.id < b.id) {
+        return -1;
+    }
+    if (a.id > b.id) {
+        return 1;
+    }
+    return 0;
+}
 
 var addItem = function() {
     var e = document.getElementById("item-name");
@@ -29,12 +48,22 @@ var addItem = function() {
 
     if (itemName != "") {
 
+        let cat = '';
+
+        for (let i = 0; i < data.items.length; i++) {
+            if (data.items[i].name == itemName) {
+                cat = data.items[i].category;
+                break;
+            }
+        }
+
         var item = {
             name: itemName,
             checked: 0,
-            category: '',
+            category: cat,
             quantity: '',
-            comments: ''
+            comments: '',
+            id: data.shoppingList.length
         }
 
         var itemExsist = 0;
@@ -73,7 +102,18 @@ var deleteChecked = function() {
 };
 
 var renderItemRow = function(list, item, i) {
-    var html = '<div class="products-list-item" id="item-' + i + '">';
+    let html = '';
+    let itemCat = item.category || "Brak przypisanej kategorii";
+
+    if (data.settings.sort == "category") {
+        if (!i) {
+            html += '<span>' + itemCat + '<span><br/>';
+        } else if (data.shoppingList[i - 1].category != item.category) {
+            html += '<span>' + itemCat + '<span><br/>';
+        }
+    }
+
+    html += '<div class="products-list-item" id="item-' + i + '">';
     if (item.checked == 0) {
         html += '<div class="btn-item btn-check" id="item-check-' + i + '"><i class="fa fa-square"></i></div>' +
             '<div class="text-item">' +
@@ -96,7 +136,14 @@ var renderList = function() {
     var list = document.getElementById("products-list");
     list.innerHTML = "";
 
+    if (data.settings.sort == "category") {
+        data.shoppingList.sort(compareCat);
+    } else {
+        data.shoppingList.sort(compareId);
+    }
+
     data.shoppingList.forEach(function(item, i) {
+
         if (data.settings.show == "showAll" || !item.checked) {
             renderItemRow(list, item, i);
         }
@@ -234,21 +281,30 @@ document.onload = function() {
             item.quantity = $("#input-qty").val();
             item.comments = $("#input-comments").val();
             data.shoppingList[curEditItem] = item;
+            for (let i = 0; i < data.items.length; i++) {
+                if (data.items[i].name == item.name) {
+                    data.items[i].category = item.category;
+                    break;
+                }
+            }
             localStorage.setItem("kb-sl-data", JSON.stringify(data));
             renderList();
         });
 
         $('.settings-btn-off').click(function() {
-            var mode = this.id.substring(this.id.indexOf('-') + 1, this.id.length);
-            var prevMode = data.settings.show;
+            var setMode = this.id.substring(this.id.indexOf('-') + 1, this.id.length);
+            var mode = setMode.substring(setMode.indexOf('-') + 1, setMode.length);
+            var setting = setMode.substring(0, setMode.indexOf('-'));
+            var prevMode = data.settings[setting];
+
             if (mode != prevMode) {
-                $('#set-' + mode).removeClass('settings-btn-off');
-                $('#set-' + mode).addClass('settings-btn-on');
+                $('#set-' + setting + '-' + mode).removeClass('settings-btn-off');
+                $('#set-' + setting + '-' + mode).addClass('settings-btn-on');
 
-                $('#set-' + prevMode).addClass('settings-btn-off');
-                $('#set-' + prevMode).removeClass('settings-btn-on');
+                $('#set-' + setting + '-' + prevMode).addClass('settings-btn-off');
+                $('#set-' + setting + '-' + prevMode).removeClass('settings-btn-on');
 
-                data.settings.show = mode;
+                data.settings[setting] = mode;
                 localStorage.setItem("kb-sl-data", JSON.stringify(data));
                 renderList();
             }
@@ -256,8 +312,11 @@ document.onload = function() {
         });
 
         var settingsShow = data.settings.show;
-        $('#set-' + settingsShow).removeClass('settings-btn-off');
-        $('#set-' + settingsShow).addClass('settings-btn-on');
+        $('#set-show-' + settingsShow).removeClass('settings-btn-off');
+        $('#set-show-' + settingsShow).addClass('settings-btn-on');
+        var settingsSort = data.settings.sort;
+        $('#set-sort-' + settingsSort).removeClass('settings-btn-off');
+        $('#set-sort-' + settingsSort).addClass('settings-btn-on');
 
     }, 250);
 

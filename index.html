@@ -26,8 +26,16 @@
             <input class="item-input" name="name" id="item-name" placeholder="Wpisz nawę produktu" onkeypress="handleKeyPress(event)">
         </div>
         <div class="settings-button-wrapper">
-            <div class="settings-btn settings-btn-off" id="set-showAll">Pokaż wszystko</div>
-            <div class="settings-btn settings-btn-off" id="set-hideChecked">Ukryj zaznaczone</div>
+            <span>Filtrowanie</span>
+            <br/>
+            <div class="settings-btn settings-btn-off" id="set-show-showAll">Pokaż wszystko</div>
+            <div class="settings-btn settings-btn-off" id="set-show-hideChecked">Ukryj zaznaczone</div>
+        </div>
+        <div class="settings-button-wrapper">
+            <span>Sortowanie</span>
+            <br/>
+            <div class="settings-btn settings-btn-off" id="set-sort-addTime">Kolejność dodania</div>
+            <div class="settings-btn settings-btn-off" id="set-sort-category">Kategoria</div>
         </div>
         <div class="products-list-wrapper" id="products-list">
         </div>

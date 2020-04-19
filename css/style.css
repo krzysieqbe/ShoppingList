@@ -55,6 +55,10 @@ body {
     overflow-y: scroll;
     padding-left: 1rem;
     height: 55vh;
+    margin-top: .5rem;
+    border-top-style: solid;
+    border-top-color: lightgrey;
+    border-top-width: 1px;
 }
 
 .products-list-item {
@@ -174,12 +178,13 @@ body {
     margin-left: 2%;
     margin-right: 2%;
     height: 2vh;
+    font-size: 1.2rem;
+    font-weight: normal;
 }
 
 .settings-btn {
     display: inline-block;
     width: 48%;
-    font-size: 1.2rem;
     text-align: center;
     cursor: pointer;
     border-width: 1px;
