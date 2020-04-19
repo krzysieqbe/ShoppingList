@@ -231,7 +231,7 @@ document.onload = function() {
             autoOpen: false,
             resizable: false,
             height: "auto",
-            width: "60%",
+            width: "80%",
             modal: true,
             buttons: {
                 "Usuń": function() {
@@ -248,7 +248,7 @@ document.onload = function() {
             autoOpen: false,
             resizable: false,
             height: "auto",
-            width: "60%",
+            width: "80%",
             modal: true,
             buttons: {
                 "Usuń": function() {
@@ -265,7 +265,7 @@ document.onload = function() {
             autoOpen: false,
             resizable: false,
             height: "auto",
-            width: "60%",
+            width: "80%",
             modal: true,
             buttons: {
                 "OK": function() {
