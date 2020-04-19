@@ -265,7 +265,7 @@ document.onload = function() {
             autoOpen: false,
             resizable: false,
             height: "auto",
-            width: "80%",
+            width: "90%",
             modal: true,
             buttons: {
                 "OK": function() {

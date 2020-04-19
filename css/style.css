@@ -163,6 +163,7 @@ body {
     font-weight: normal;
     color: black;
     margin-bottom: 1rem;
+    width: 25%;
 }
 
 #input-lab-comments {
@@ -181,6 +182,7 @@ body {
     height: 2vh;
     font-size: 1.2rem;
     font-weight: normal;
+    z-index: 1;
 }
 
 .settings-btn {
