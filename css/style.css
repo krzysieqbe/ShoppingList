@@ -28,7 +28,8 @@ body {
 .product-input-wrapper {
     margin-left: 2%;
     margin-right: 2%;
-    height: 8vh;
+    height: 10vh;
+    z-index: 999;
 }
 
 .item-input {
@@ -54,7 +55,7 @@ body {
 .products-list-wrapper {
     overflow-y: scroll;
     padding-left: 1rem;
-    height: 55vh;
+    height: 50vh;
     margin-top: .5rem;
     border-top-style: solid;
     border-top-color: lightgrey;
