@@ -28,7 +28,7 @@ body {
 .product-input-wrapper {
     margin-left: 2%;
     margin-right: 2%;
-    height: 6vh;
+    height: 8vh;
 }
 
 .item-input {
@@ -171,11 +171,14 @@ body {
 .settings-button-wrapper {
     width: 100%;
     display: inline-block;
+    margin-left: 2%;
+    margin-right: 2%;
+    height: 2vh;
 }
 
 .settings-btn {
     display: inline-block;
-    width: 48.5%;
+    width: 48%;
     font-size: 1.2rem;
     text-align: center;
     cursor: pointer;
