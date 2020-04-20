@@ -19,6 +19,7 @@ data.settings = settings;
 
 var acItem;
 var curEditItem = -1;
+var prevItemCat = '';
 
 var compareCat = function(a, b) {
     if (a.category < b.category) {
@@ -108,10 +109,11 @@ var renderItemRow = function(list, item, i) {
     if (data.settings.sort == "category") {
         if (!i) {
             html += '<span>' + itemCat + '<span><br/>';
-        } else if (data.shoppingList[i - 1].category != item.category) {
+        } else if (prevItemCat != item.category) {
             html += '<span>' + itemCat + '<span><br/>';
         }
     }
+    prevItemCat = item.category;
 
     html += '<div class="products-list-item" id="item-' + i + '">';
     if (item.checked == 0) {
